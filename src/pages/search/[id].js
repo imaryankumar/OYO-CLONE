@@ -1,6 +1,5 @@
 import SEO from "@/components/SEO";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { MdLocationOn, MdStar } from "react-icons/md";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";

@@ -2,20 +2,13 @@ import SEO from "@/components/SEO";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
-import { IoWifiOutline, IoSearchOutline } from "react-icons/io5";
-import { GiWaterFountain } from "react-icons/gi";
+import { IoSearchOutline } from "react-icons/io5";
 import { useTheme } from "next-themes";
-import Image from "next/image";
-import Cookies from "js-cookie";
-import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
-import {
-  MdLightMode,
-  MdOutlineWorkspacePremium,
-  MdOutlineDoorSliding,
-  MdStar,
-  MdDarkMode,
-} from "react-icons/md";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
+import SearchImageSlider from "@/utils/SearchImageSlider";
+import SearchBookingBtn from "@/utils/SearchBookingBtn";
+import SearchHotelRating from "@/utils/SearchHotelRating";
 
 const search = ({ data }) => {
   const [isMode, setIsMode] = useState(false);
@@ -26,7 +19,6 @@ const search = ({ data }) => {
   const [sortedProduct, setSortedProduct] = useState(data?.allHotels);
   const { theme, setTheme } = useTheme();
   const router = useRouter();
-  let cookie = Cookies.get("userToken");
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -43,16 +35,6 @@ const search = ({ data }) => {
     item.name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
-  const onHotelBookHandler = () => {
-    if (!cookie) {
-      toast.error("Please Logged In!");
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
-    } else {
-      router.push("/booking");
-    }
-  };
   const onPopularityHandler = () => {
     const sortedPopularity = data.allHotels
       .slice()
@@ -74,12 +56,7 @@ const search = ({ data }) => {
     setSortedProduct(sortedLowtoHigh);
     setProductSorting("Price: Low to High");
   };
-  
-  const locationHotel = data.allHotels.filter((item)=>router.query.location === item.location);
-  const allhotelLocation = data.allHotels.map((item)=>item.location);
-  const uniqueHotel = [...new Set(allhotelLocation)]
-  // console.log("Hotel",uniqueHotel)
-  const myData = data.allHotels[1].location;
+
   const onModeHanlder = () => {
     setIsMode((prev) => !prev);
     setTheme(theme === "light" ? "dark" : "light");
@@ -175,86 +152,18 @@ const search = ({ data }) => {
                     className="py-4 flex flex-col border-b border-gray-300  "
                   >
                     <div className=" w-100 h-100 flex items-center justify-between gap-6 cursor-pointer ">
-                      <div className="w-[50%]">
-                        <Image
-                          src={item.banner}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          priority
-                          style={{
-                            width: "100%",
-                            height: "auto",
-                            borderRadius: "5px",
-                          }}
-                          alt="Hotelsimages"
-                        />
-                      </div>
-                      <div className="w-[50%] flex flex-col items-start justify-between  h-80 ">
+                      <SearchImageSlider item={item} />
+                      <div className="w-[50%] flex flex-col items-start justify-between  h-64 ">
                         <div className="flex flex-col">
-                          <h1 className="text-xl font-medium">{item?.name}</h1>
-                          <h3 className="text-sm font-light">
+                          <h1 className="text-xl font-medium overflow-hidden line-clamp-1 ">
+                            {item?.name}
+                          </h1>
+                          <h3 className="text-sm font-light overflow-hidden line-clamp-3  ">
                             {item?.description}
                           </h3>
                         </div>
-                        <div className="flex flex-col py-5 items-start justify-center gap-3 ">
-                          <div className="flex items-center justify-center gap-4">
-                            <div className="px-1 text-white rounded-sm bg-green-600 flex items-center justify-center gap-1 ">
-                              <span>{item?.rating}</span>
-                              <MdStar />
-                            </div>
-                            <span>({item.rating * 100} Ratings)</span>
-                            <span>· Excellent</span>
-                          </div>
-                          <div className="flex items-center justify-center gap-4">
-                            <div className="flex gap-1 items-center justify-center">
-                              <MdOutlineDoorSliding size={20} />
-                              <span>Elevator</span>
-                            </div>
-                            <div className="flex gap-1 items-center justify-center">
-                              <IoWifiOutline size={20} />
-                              <span>Free Wifi</span>
-                            </div>
-                            <div className="flex gap-1 items-center justify-center">
-                              <GiWaterFountain size={20} />
-                              <span>Geyser</span>
-                            </div>
-                          </div>
-                          <div className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-whhite p-2 text-white rounded-sm flex items-center justify-between gap-3">
-                            <span>
-                              <MdOutlineWorkspacePremium size={25} />
-                            </span>
-                            <span>WIZARD MEMBER</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-center gap-6">
-                          <div className="flex gap-3 items-center justify-center cursor-pointer">
-                            <h3 className="text-xl font-medium text-red-500">
-                              ₹{item?.price}
-                            </h3>
-                            <span className="line-through text-sm">
-                              ₹{item?.baseprice}
-                            </span>
-                            <span className="text-sm text-blue-500">
-                              {Math.floor(
-                                (item.baseprice - item.price) / item.price
-                              ) * 10}
-                              % off
-                            </span>
-                          </div>
-                          <button
-                            className=" text-black px-4 py-1 rounded font-normal border-2 border-black cursor-pointer bg-white "
-                            onClick={() => router.push(`/search/${item?._id}`)}
-                          >
-                            View Details
-                          </button>
-                          <button
-                            className="px-5 py-2 bg-green-500 rounded text-white font-medium cursor-pointer "
-                            onClick={onHotelBookHandler}
-                          >
-                            Book Now
-                          </button>
-                        </div>
+                        <SearchHotelRating item={item} />
+                        <SearchBookingBtn item={item} />
                       </div>
                     </div>
                   </div>
@@ -262,7 +171,9 @@ const search = ({ data }) => {
               })}
             </section>
           ) : (
-            <div className="text-center my-5 font-medium text-2xl ">No hotels found matching your search criteria !!</div>
+            <div className="text-center my-5 font-medium text-2xl ">
+              No hotels found matching your search criteria !!
+            </div>
           )}
         </main>
       </div>
