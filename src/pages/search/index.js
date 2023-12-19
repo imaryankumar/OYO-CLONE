@@ -56,7 +56,9 @@ const search = ({ data }) => {
     setSortedProduct(sortedLowtoHigh);
     setProductSorting("Price: Low to High");
   };
-
+  const Recommended = () => {
+    setProductSorting(sortedProduct);
+  };
   const onModeHanlder = () => {
     setIsMode((prev) => !prev);
     setTheme(theme === "light" ? "dark" : "light");

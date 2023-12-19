@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .scrollbar-hide {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bg-gradiant {
+  background: linear-gradient(to right, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234)) !important;
 }
 

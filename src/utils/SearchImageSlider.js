@@ -10,12 +10,17 @@ const SearchImageSlider = ({ item }) => {
     },
   };
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const [selectImage, setSelectImage] = useState("");
   const onImageSliderOver = () => {
     setIsMouseOver(true);
   };
   const onImageSliderLeave = () => {
     setIsMouseOver(false);
   };
+  const onSingleImageClick = (id) => {
+    setSelectImage(id);
+  };
+
   return (
     <div className="w-[50%] flex gap-2">
       <div
@@ -32,7 +37,7 @@ const SearchImageSlider = ({ item }) => {
             return (
               <Image
                 key={key}
-                src={image}
+                src={selectImage || image}
                 width={0}
                 height={0}
                 sizes="100vw"
@@ -53,7 +58,13 @@ const SearchImageSlider = ({ item }) => {
         {item.gallery.slice(0, 4).map((img, key) => {
           return (
             <div key={key} className="relative">
-              <Image src={img} width={100} height={100} alt="image" />
+              <Image
+                src={img}
+                width={100}
+                height={100}
+                alt="image"
+                onClick={() => onSingleImageClick(img)}
+              />
             </div>
           );
         })}

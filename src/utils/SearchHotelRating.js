@@ -30,7 +30,7 @@ const SearchHotelRating = ({ item }) => {
           <span>Geyser</span>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-whhite p-2 text-white rounded-sm flex items-center justify-between gap-1">
+      <div className=" bg-gradiant p-2 flex items-center justify-center gap-1 rounded text-white ">
         <span>
           <MdOutlineWorkspacePremium size={25} />
         </span>
@@ -41,3 +41,4 @@ const SearchHotelRating = ({ item }) => {
 };
 
 export default SearchHotelRating;
+
