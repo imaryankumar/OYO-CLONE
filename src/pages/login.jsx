@@ -4,13 +4,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import bgImage from '../../public/images/loginimgs.jpg'
+import bgImage from "../../public/images/loginimgs.jpg";
 import SEO from "@/components/SEO";
 import { FcGoogle } from "react-icons/fc";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react";
 const login = () => {
   const router = useRouter();
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -50,7 +50,7 @@ const login = () => {
     });
   };
 
-  const onLoginHandler = () => {
+  const onLoginHandler = async () => {
     const userData = {
       email: user.email,
       password: user.password,
@@ -59,7 +59,6 @@ const login = () => {
       axios
         .post("/api/auth/login", userData)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             toast.success(response.data.msg);
             Cookies.set("userToken", response.data.token, { expires: 1 });
@@ -70,6 +69,7 @@ const login = () => {
     } else {
       toast("All Fields are Mandatory");
     }
+
     setUser({
       email: "",
       password: "",
@@ -80,11 +80,26 @@ const login = () => {
     setIsLogin(!isLogin);
   };
   return (
-    <section className="w-100 h-100 relative" style={{backgroundImage:`url(${bgImage.src})`,backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover",width:"100vw",height:"100vh"}} >
+    <section
+      className="w-100 h-100 relative"
+      style={{
+        backgroundImage: `url(${bgImage.src})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
       <SEO title="OYO:India's Best Online Hotels" />
       <div className="px-20 py-6">
         <nav className="flex items-center justify-start gap-6 text-white opacity-100 ">
-          <div className="text-4xl font-black cursor-pointer  text-red-500 " onClick={()=>router.push("/")} >OYO</div>
+          <div
+            className="text-4xl font-black cursor-pointer  text-red-500 "
+            onClick={() => router.push("/")}
+          >
+            OYO
+          </div>
           <span className="text-2xl font-serif ">
             Hotels and homes across 800 cities, 24+ countries
           </span>
@@ -156,10 +171,13 @@ const login = () => {
                   Signup
                 </button>
               )}
-               <div className="w-100 bg-white rounded-full flex items-center justify-center gap-3 border py-2 px-4  cursor-pointer mx-6 " onClick={() => signIn("google")} >
-                 <FcGoogle size={25} />
+              <div
+                className="w-100 bg-white rounded-full flex items-center justify-center gap-3 border py-2 px-4  cursor-pointer mx-6 "
+                onClick={() => signIn("google")}
+              >
+                <FcGoogle size={25} />
                 <span>Continue with Google</span>
-               </div>
+              </div>
               <div className="text-sm">
                 Prefer to{" "}
                 {isLogin ? "Sign in with email" : "Log in with password"}?{" "}
