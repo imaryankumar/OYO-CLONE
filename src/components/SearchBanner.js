@@ -57,7 +57,9 @@ const SearchBanner = () => {
   const onSearchInputHandler = (e) => {
     setSearchInput(e.target.value);
   };
-
+  const onCityNameHandler = (name) => {
+    setSearchInput(name + " ");
+  };
   return (
     <section className="w-100 h-60 bg-gradient-to-r from-pink-300 via-red-500 to-red-500 ">
       <div className="flex flex-col items-center justify-center gap-5 px-20 py-6  ">
@@ -88,7 +90,8 @@ const SearchBanner = () => {
                 return (
                   <div
                     key={key}
-                    className="bg-blue-400 py-3 px-3 border-b-2 text-white "
+                    className="bg-blue-400 py-3 px-3 border-b-2 text-white cursor-pointer "
+                    onClick={() => onCityNameHandler(item)}
                   >
                     {item}
                   </div>

@@ -37,3 +37,8 @@ export default async function Login(req, res) {
     console.log(error);
   }
 }
+
+export const api = {
+  externalResolver: true,
+  bodyParser: false,
+};

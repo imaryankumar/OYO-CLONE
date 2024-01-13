@@ -56,18 +56,21 @@ const login = () => {
       password: user.password,
     };
     if (user.name || user.email) {
-      axios
-        .post("/api/auth/login", userData)
-        .then((response) => {
-          if (response.status === 200) {
-            toast.success(response.data.msg);
-            Cookies.set("userToken", response.data.token, { expires: 1 });
-            router.back();
-          } else {
-            toast.error("Invalid Password");
-          }
-        })
-        .catch((err) => toast.error(err));
+      const loginData = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const loginRespData = await loginData.json();
+      if (loginRespData.success === true) {
+        toast.success(loginRespData.msg);
+        Cookies.set("userToken", loginRespData.token, { expires: 1 });
+        router.back();
+      } else {
+        toast.error(loginRespData.msg);
+      }
     } else {
       toast.error("All Fields are Mandatory");
     }
@@ -77,7 +80,6 @@ const login = () => {
       password: "",
     });
   };
-
   const userLoginHandler = () => {
     setIsLogin(!isLogin);
   };

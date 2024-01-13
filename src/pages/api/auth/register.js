@@ -31,7 +31,7 @@ export default async function Register(req, res) {
           expiresIn: 7,
         }
       );
-      res.status(201).json({
+      return res.status(201).json({
         sucess: true,
         msg: "Registered Successfully",
         userCreated,
@@ -42,3 +42,7 @@ export default async function Register(req, res) {
     console.log(error);
   }
 }
+export const api = {
+  externalResolver: true,
+  bodyParser: false,
+};

@@ -3,21 +3,22 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
-import { useTheme } from "next-themes";
 import { RotatingLines } from "react-loader-spinner";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import SearchImageSlider from "@/utils/SearchImageSlider";
 import SearchBookingBtn from "@/utils/SearchBookingBtn";
 import SearchHotelRating from "@/utils/SearchHotelRating";
+import { useTheme } from "../../utils/ThemeContext";
+import FilterSideSection from "@/utils/FilterSideSection";
 
 const search = ({ data }) => {
+  const { darkMode, toggleTheme } = useTheme();
   const [isMode, setIsMode] = useState(false);
   const [isSort, setIsSort] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [spinLoader, setSpinLoader] = useState(true);
   const [productSorting, setProductSorting] = useState("Recommended");
   const [sortedProduct, setSortedProduct] = useState(data?.allHotels);
-  const { theme, setTheme } = useTheme();
   const router = useRouter();
 
   useEffect(() => {
@@ -61,23 +62,14 @@ const search = ({ data }) => {
   };
   const onModeHanlder = () => {
     setIsMode((prev) => !prev);
-    setTheme(theme === "light" ? "dark" : "light");
+    toggleTheme((prev) => !prev);
   };
   return (
-    <section
-      className={
-        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      }
-    >
+    <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
         <SEO title={`Hotels in India starting @399`} />
         <div className="w-[20%] h-screen border-r border-gray-300  ">
-          <div className="px-5 py-6 flex flex-col gap-1">
-            <h2 className="text-xl font-medium">Filters</h2>
-            <h3 className="text-sm font-medium">
-              Popular locations in Delhi, India
-            </h3>
-          </div>
+          <FilterSideSection />
         </div>
         <main className="w-[80%] px-8 py-1 ">
           <div className="w-100 border-b border-gray-300 flex items-center justify-between py-4 ">
@@ -88,6 +80,7 @@ const search = ({ data }) => {
               </span>{" "}
               in {router.query.location}, India
             </h2>
+
             <div className="flex items-center justify-center gap-6">
               <div className="flex items-center justify-center relative ">
                 <IoSearchOutline className="absolute top-50 left-2 text-xl" />
@@ -100,11 +93,10 @@ const search = ({ data }) => {
                 />
               </div>
               <div
-                className="flex items-center justify-center gap-2 cursor-pointer"
+                className="flex items-center justify-end gap-2 cursor-pointer  "
                 onClick={onModeHanlder}
               >
-                {isMode ? "Light mode" : "Dark mode"}
-                {isMode ? <MdLightMode size={25} /> : <MdDarkMode size={25} />}
+                {isMode ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
               </div>
               <div className="flex items-center justify-center gap-3">
                 <span>Sort By</span>

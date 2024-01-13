@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const hoteladd = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const redirectUserLoggedIn = () => {
+      const authUser = Cookies.get("userToken");
+      if (!authUser) {
+        router.push("/login");
+      }
+    };
+    redirectUserLoggedIn();
+  }, [router]);
   const [hotelDataAdd, setHotelDataAdd] = useState({
     name: "",
     description: "",
@@ -49,7 +61,15 @@ const hoteladd = () => {
   };
   return (
     <div className="container mx-auto">
-      <h1 className="text-center py-3 text-3xl font-semibold ">Hotel Added</h1>
+      <h1 className="text-center py-3 text-3xl font-semibold ">
+        <span
+          className="text-red-500 text-3xl font-semibold cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          OYO
+        </span>{" "}
+        Room Added
+      </h1>
       <form
         onSubmit={(e) => onHotelDataHandler(e)}
         className="w-[50%] mx-auto bg-slate-50 shadow-md rounded px-8 pt-6 pb-8 mb-4"
