@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
+import { useTheme } from "next-themes";
 import { RotatingLines } from "react-loader-spinner";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import SearchImageSlider from "@/utils/SearchImageSlider";
@@ -10,12 +11,13 @@ import SearchBookingBtn from "@/utils/SearchBookingBtn";
 import SearchHotelRating from "@/utils/SearchHotelRating";
 
 const search = ({ data }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMode, setIsMode] = useState(false);
   const [isSort, setIsSort] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [spinLoader, setSpinLoader] = useState(true);
   const [productSorting, setProductSorting] = useState("Recommended");
   const [sortedProduct, setSortedProduct] = useState(data?.allHotels);
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
 
   useEffect(() => {
@@ -57,20 +59,16 @@ const search = ({ data }) => {
   const Recommended = () => {
     setProductSorting(sortedProduct);
   };
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark-mode");
-    } else {
-      document.documentElement.classList.remove("dark-mode");
-    }
-  }, [isDarkMode]);
   const onModeHanlder = () => {
-    setIsDarkMode((prevMode) => !prevMode);
+    setIsMode((prev) => !prev);
+    setTheme(theme === "light" ? "dark" : "light");
   };
-
   return (
-    <section className={""}>
+    <section
+      className={
+        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+      }
+    >
       <div className="w-100 h-100 relative flex ">
         <SEO title={`Hotels in India starting @399`} />
         <div className="w-[20%] h-screen border-r border-gray-300  ">
@@ -105,12 +103,8 @@ const search = ({ data }) => {
                 className="flex items-center justify-center gap-2 cursor-pointer"
                 onClick={onModeHanlder}
               >
-                {isDarkMode ? "Light mode" : "Dark mode"}
-                {isDarkMode ? (
-                  <MdLightMode size={25} />
-                ) : (
-                  <MdDarkMode size={25} />
-                )}
+                {isMode ? "Light mode" : "Dark mode"}
+                {isMode ? <MdLightMode size={25} /> : <MdDarkMode size={25} />}
               </div>
               <div className="flex items-center justify-center gap-3">
                 <span>Sort By</span>

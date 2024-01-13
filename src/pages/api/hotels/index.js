@@ -3,7 +3,6 @@ import hotelModal from "@/models/hotel.model";
 
 export default async function Handler(req, res) {
   try {
-   
     // if (req.method === "POST") {
     //   const newHotel = new hotelModal(req.body);
     //   const result = await newHotel.save();
@@ -12,7 +11,45 @@ export default async function Handler(req, res) {
     //     result,
     //   });
     // }
-   
+
+    if (req.method === "POST") {
+      const {
+        name,
+        description,
+        banner,
+        gallery,
+        price,
+        baseprice,
+        location,
+        rating,
+      } = req.body;
+      if (
+        !name ||
+        !description ||
+        !banner ||
+        !gallery ||
+        !price ||
+        !baseprice ||
+        !location ||
+        !rating
+      ) {
+        return res
+          .status(400)
+          .json({ sucess: false, msg: "All Fields are Mandatory" });
+      }
+      const newHotel = await hotelModal.create({
+        name,
+        description,
+        banner,
+        gallery,
+        price,
+        baseprice,
+        location,
+        rating,
+      });
+      console.log("new Hotel", newHotel);
+    }
+
     if (req.method === "GET") {
       ConnectDB();
       const hotels = await hotelModal.find({ location: req.query.city });

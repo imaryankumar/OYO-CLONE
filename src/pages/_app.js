@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import "tailwindcss/tailwind.css";
@@ -13,7 +12,7 @@ export default function App({
     <SessionProvider session={session}>
       <ThemeProvider attribute="class">
         <Component {...pageProps} />
-        <ToastContainer />
+        <Toaster />
       </ThemeProvider>
     </SessionProvider>
   );

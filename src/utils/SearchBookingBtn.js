@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const SearchBookingBtn = ({ item }) => {
   let cookie = Cookies.get("userToken");

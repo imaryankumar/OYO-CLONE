@@ -8,7 +8,7 @@ import { HiUserCircle } from "react-icons/hi";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const Navbar = () => {
   const router = useRouter();
   const [session, setSession] = useState();
@@ -17,10 +17,10 @@ const Navbar = () => {
   }, []);
   const userRemoveHandler = () => {
     setSession(Cookies.remove("userToken"));
-    toast.success("Logged Out!!")
-    setTimeout(()=>{
+    toast.success("Logged Out!!");
+    setTimeout(() => {
       router.push("/login");
-    },1000)
+    }, 1000);
   };
   return (
     <nav className="w-100 h-100  bg-slate-100 text-black shadow flex items-center justify-between px-8 py-3 ">
@@ -65,9 +65,16 @@ const Navbar = () => {
             <FaSortDown size={18} />
           </div>
         </li>
-
+        <li
+          onClick={() => router.push("/hoteladd")}
+          className="flex items-center justify-center gap-3 cursor-pointer "
+        >
+          Add Hotels
+        </li>
         <li className="flex items-center justify-center gap-2 cursor-pointer ">
-          <Link href={session ? "":"/login"}><HiUserCircle size={30} /></Link>
+          <Link href={session ? "" : "/login"}>
+            <HiUserCircle size={30} />
+          </Link>
           {session ? (
             <span onClick={userRemoveHandler} className="cursor-pointer">
               Logout

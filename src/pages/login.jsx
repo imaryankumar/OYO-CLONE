@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LuBadgePercent } from "react-icons/lu";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import bgImage from "../../public/images/loginimgs.jpg";
 import SEO from "@/components/SEO";
@@ -40,7 +40,7 @@ const login = () => {
         })
         .catch((err) => console.log(err));
     } else {
-      toast("All Fields are Mandatory");
+      toast.error("All Fields are Mandatory");
     }
 
     setUser({
@@ -63,11 +63,13 @@ const login = () => {
             toast.success(response.data.msg);
             Cookies.set("userToken", response.data.token, { expires: 1 });
             router.back();
+          } else {
+            toast.error("Invalid Password");
           }
         })
-        .catch((err) => toast(err));
+        .catch((err) => toast.error(err));
     } else {
-      toast("All Fields are Mandatory");
+      toast.error("All Fields are Mandatory");
     }
 
     setUser({

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const SearchBanner = () => {
   const router = useRouter();
   const searchRef = useRef();
@@ -51,7 +51,7 @@ const SearchBanner = () => {
     if (searchInput) {
       router.push(`/search?location=${searchInput}`);
     } else {
-      toast("Please Enter Your Location!");
+      toast.error("Please Enter Your Location!");
     }
   };
   const onSearchInputHandler = (e) => {
