@@ -65,12 +65,14 @@ const Navbar = () => {
             <FaSortDown size={18} />
           </div>
         </li>
+
         <li
           onClick={() => router.push("/hoteladd")}
           className="flex items-center justify-center gap-3 cursor-pointer "
         >
           Add Hotels
         </li>
+
         <li className="flex items-center justify-center gap-2 cursor-pointer ">
           <Link href={session ? "" : "/login"}>
             <HiUserCircle size={30} />

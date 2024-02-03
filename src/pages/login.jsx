@@ -108,7 +108,7 @@ const login = () => {
             Hotels and homes across 800 cities, 24+ countries
           </span>
         </nav>
-        <main className="flex items-center justify-between w-100 relative  min-h-[30rem] px-24 ">
+        <div className="flex items-center justify-between w-100 relative  min-h-[30rem] px-24 ">
           <div className="flex flex-col items-start justify-center gap-2 w-[50%]">
             <h2 className="text-5xl font-bold text-white font-serif">
               There’s a smarter way to OYO around
@@ -194,7 +194,7 @@ const login = () => {
               </div>
             </form>
           </div>
-        </main>
+        </div>
       </div>
     </section>
   );

@@ -8,17 +8,17 @@ const ViewDetails = ({ data }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
   return (
     <section className="w-100 h-100 relative">
-      <SEO title={data.hotelId?.name}  />
+      <SEO title={data.hotelId?.name} />
       <div className="w-100 h-100 relative ">
         <Carousel
           responsive={responsive}
           infinite
-          autoPlay
+          autoPlay={false}
           autoPlaySpeed={2000}
         >
           {data.hotelId?.gallery.map((item, key) => {
@@ -37,7 +37,7 @@ const ViewDetails = ({ data }) => {
           })}
         </Carousel>
       </div>
-      <main className=" w-100 h-100 px-16 py-4 relative flex flex-col items-start justify-center gap-2 ">
+      <div className=" w-100 h-100 px-16 py-4 relative flex flex-col items-start justify-center gap-2 ">
         <h1 className="text-3xl font-medium">{data.hotelId.name}</h1>
         <h2 className="text-base font-light ">{data.hotelId.description}</h2>
         <div className="flex items-center justify-between gap-1  ">
@@ -54,7 +54,7 @@ const ViewDetails = ({ data }) => {
             <span>· Excellent</span>
           </div>
         </div>
-      </main>
+      </div>
     </section>
   );
 };
@@ -67,4 +67,3 @@ export async function getServerSideProps(context) {
   const data = await res.json();
   return { props: { data } };
 }
-

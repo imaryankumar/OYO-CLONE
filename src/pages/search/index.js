@@ -9,7 +9,14 @@ import SearchImageSlider from "@/utils/SearchImageSlider";
 import SearchBookingBtn from "@/utils/SearchBookingBtn";
 import SearchHotelRating from "@/utils/SearchHotelRating";
 import { useTheme } from "../../utils/ThemeContext";
-import FilterSideSection from "@/utils/FilterSideSection";
+import FilterSideSection from "@/utils/FilterSections/FilterSideSection";
+import HotelPriceRangeFilter from "@/utils/FilterSections/HotelPriceRangeFilter";
+import HotelFilterCollection from "@/utils/FilterSections/HotelFilterCollection";
+import HotelFilterCatageory from "@/utils/FilterSections/HotelFilterCatageory";
+import HotelAccomodationType from "@/utils/FilterSections/HotelAccomodationType";
+import HotelFilterFacilities from "@/utils/FilterSections/HotelFilterFacilities";
+import HotelFilterCheckIn from "@/utils/FilterSections/HotelFilterCheckIn";
+import WizardHotelMember from "@/utils/FilterSections/WizardHotelMember";
 
 const search = ({ data }) => {
   const { darkMode, toggleTheme } = useTheme();
@@ -25,7 +32,7 @@ const search = ({ data }) => {
     const id = setTimeout(() => {
       setSortedProduct(filtered);
       setSpinLoader(false);
-    }, 1000);
+    }, 500);
     return () => {
       clearTimeout(id);
     };
@@ -68,10 +75,17 @@ const search = ({ data }) => {
     <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
         <SEO title={`Hotels in India starting @399`} />
-        <div className="w-[20%] h-screen border-r border-gray-300  ">
+        <div className="w-[20%] h-screen border-r border-gray-300 px-5 overflow-auto ">
           <FilterSideSection />
+          <HotelPriceRangeFilter />
+          <HotelFilterCollection />
+          <HotelFilterCatageory />
+          <HotelAccomodationType />
+          <HotelFilterFacilities />
+          <WizardHotelMember />
+          <HotelFilterCheckIn />
         </div>
-        <main className="w-[80%] px-8 py-1 ">
+        <div className="w-[80%] px-8 py-1 ">
           <div className="w-100 border-b border-gray-300 flex items-center justify-between py-4 ">
             <h2 className="text-2xl font-semibold opacity-80 ">
               {sortedProduct.length}{" "}
@@ -169,7 +183,7 @@ const search = ({ data }) => {
               No hotels found matching your search criteria !!
             </div>
           )}
-        </main>
+        </div>
       </div>
     </section>
   );

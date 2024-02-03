@@ -29,3 +29,24 @@
   background-color: #fff;
   color: #000;
 }
+
+.bg-citytab {
+  background: #008b8b;
+}
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.CollectionList-Gap {
+  padding-top: 10px;
+}
+.Categories-Font {
+  font-weight: 450;
+}
+.wizard-width {
+  width: 60%;
+  padding: 1rem 0;
+  cursor: pointer;
+}
