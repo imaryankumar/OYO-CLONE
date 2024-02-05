@@ -17,7 +17,7 @@ const SearchBanner = () => {
 
   useEffect(() => {
     const getHotelData = async () => {
-      const res = await fetch(`/api/hotels`);
+      const res = await fetch(`/api/hotels/all`);
       const data = await res.json();
       setSearchHotelValue(data?.allHotels);
     };
@@ -28,7 +28,7 @@ const SearchBanner = () => {
     };
   }, []);
 
-  const duplicateHotel = searchHotelValue.map((item) => item.location);
+  const duplicateHotel = searchHotelValue?.map((item) => item.location);
   const uniqueHotel = [...new Set(duplicateHotel)];
 
   const filterProducts = () => {

@@ -25,7 +25,7 @@ const search = ({ data }) => {
   const [searchInput, setSearchInput] = useState("");
   const [spinLoader, setSpinLoader] = useState(true);
   const [productSorting, setProductSorting] = useState("Recommended");
-  const [sortedProduct, setSortedProduct] = useState(data?.allHotels);
+  const [sortedProduct, setSortedProduct] = useState(data?.hotels);
   const router = useRouter();
 
   useEffect(() => {
@@ -44,21 +44,21 @@ const search = ({ data }) => {
   );
 
   const onPopularityHandler = () => {
-    const sortedPopularity = data.allHotels
+    const sortedPopularity = data?.hotels
       .slice()
       .sort((a, b) => b.rating - a.rating);
     setSortedProduct(sortedPopularity);
     setProductSorting("Popularity");
   };
   const onHightolowHandler = () => {
-    const sortedHightoLow = data.allHotels
+    const sortedHightoLow = data?.hotels
       .slice()
       .sort((a, b) => b.price - a.price);
     setSortedProduct(sortedHightoLow);
     setProductSorting("Price: High to Low");
   };
   const onLowtohighHandler = () => {
-    const sortedLowtoHigh = data.allHotels
+    const sortedLowtoHigh = data?.hotels
       .slice()
       .sort((a, b) => a.price - b.price);
     setSortedProduct(sortedLowtoHigh);
@@ -71,6 +71,8 @@ const search = ({ data }) => {
     setIsMode((prev) => !prev);
     toggleTheme((prev) => !prev);
   };
+  console.log("Sorted====>", sortedProduct);
+  console.log("Lenght", sortedProduct?.length);
   return (
     <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
@@ -88,11 +90,11 @@ const search = ({ data }) => {
         <div className="w-[80%] px-8 py-1 ">
           <div className="w-100 border-b border-gray-300 flex items-center justify-between py-4 ">
             <h2 className="text-2xl font-semibold opacity-80 ">
-              {sortedProduct.length}{" "}
+              {data?.hotels?.length}{" "}
               <span className="cursor-pointer" onClick={() => router.push("/")}>
                 OYOs
               </span>{" "}
-              in {router.query.location}, India
+              in {router.query?.location}, India
             </h2>
 
             <div className="flex items-center justify-center gap-6">
@@ -151,9 +153,9 @@ const search = ({ data }) => {
                 visible={true}
               />
             </div>
-          ) : sortedProduct.length > 0 ? (
+          ) : data?.hotels?.length > 0 ? (
             <section className="h-[86vh] overflow-y-auto scrollbar-hide">
-              {sortedProduct?.map((item, key) => {
+              {data?.hotels?.map((item, key) => {
                 return (
                   <div
                     key={key}
@@ -191,8 +193,11 @@ const search = ({ data }) => {
 
 export default search;
 
-export async function getServerSideProps() {
-  const res = await fetch(`${process.env.BASE_URL}/api/hotels`);
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const res = await fetch(
+    `${process.env.BASE_URL}/api/hotels?city=${query.location}`
+  );
   const data = await res.json();
   return { props: { data } };
 }

@@ -55,9 +55,11 @@ export default async function Handler(req, res) {
       const hotels = await hotelModal.find({ location: req.query.city });
       if (hotels.length > 0) {
         return res.status(200).json({ success: true, hotels });
+      } else {
+        return res.status(400).json({ success: true, msg: "Hotels Not Found" });
       }
-      const allHotels = await hotelModal.find({});
-      return res.status(200).json({ success: true, allHotels });
+      // const allHotels = await hotelModal.find({});
+      // return res.status(200).json({ success: true, allHotels });
     }
   } catch (error) {
     console.log(error);
