@@ -12,7 +12,7 @@ const SearchBookingBtn = ({ item }) => {
         router.push("/login");
       }, 1000);
     } else {
-      router.push("/booking");
+      router.push(`/search/${item?._id}/booking`);
     }
   };
   const router = useRouter();

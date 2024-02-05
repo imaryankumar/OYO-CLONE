@@ -75,7 +75,7 @@ const search = ({ data }) => {
     <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
         <SEO title={`Hotels in India starting @399`} />
-        <div className="w-[20%] h-screen border-r border-gray-300 px-5 overflow-auto ">
+        <div className="w-[20%] h-screen border-r border-gray-300 px-5 overflow-auto scrollbar-hide ">
           <FilterSideSection />
           <HotelPriceRangeFilter />
           <HotelFilterCollection />

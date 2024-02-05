@@ -1,5 +1,3 @@
-import React from "react";
-
 const HotelCardSkelton = () => {
   return (
     <div class="flex w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg animate-pulse dark:bg-gray-800">
