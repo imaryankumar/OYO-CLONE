@@ -100,7 +100,7 @@ const search = ({ data }) => {
               <div className="flex items-center justify-center relative ">
                 <IoSearchOutline className="absolute top-50 left-2 text-xl" />
                 <input
-                  type="type"
+                  type="text"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   placeholder="Search..."
