@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 const SearchBanner = () => {
   const router = useRouter();
   const searchRef = useRef();
@@ -8,6 +9,7 @@ const SearchBanner = () => {
   const [searchHotelValue, setSearchHotelValue] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClickOutside = (event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -47,9 +49,11 @@ const SearchBanner = () => {
   }, [searchInput]);
 
   const onSearchHandler = () => {
-    console.log(searchInput);
     if (searchInput) {
-      router.push(`/search?location=${searchInput}`);
+      setIsLoading(true);
+      setTimeout(() => {
+        router.push(`/search?location=${searchInput}`);
+      }, 1000);
     } else {
       toast.error("Please Enter Your Location!");
     }
@@ -76,23 +80,20 @@ const SearchBanner = () => {
             className="w-[32rem] py-4  px-5 rounded-sm  outline-none "
           />
           <button
-            className="h-[57px] bg-green-500 outline-none px-12 rounded-sm text-white text-xl font-medium "
-            onClick={onSearchHandler}
-          >
-            Search
+            className="h-[57px] flex items-center justify-center bg-green-500 outline-none px-12 rounded-sm text-white text-xl font-medium "
+            onClick={onSearchHandler}>
+            {isLoading ? <ThreeDots color={["white"]} /> : "Search"}
           </button>
           {showDropdown && (
             <div
               className="absolute w-100 h-12 left-0 right-40 top-14 rounded-sm  "
-              ref={searchRef}
-            >
+              ref={searchRef}>
               {filteredProducts.map((item, key) => {
                 return (
                   <div
                     key={key}
                     className="bg-blue-400 py-3 px-3 border-b-2 text-white cursor-pointer "
-                    onClick={() => onCityNameHandler(item)}
-                  >
+                    onClick={() => onCityNameHandler(item)}>
                     {item}
                   </div>
                 );

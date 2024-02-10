@@ -1,5 +1,5 @@
 const guestPolicy = () => {
-  return <div></div>;
+  return <div>Hello</div>;
 };
 
 export default guestPolicy;

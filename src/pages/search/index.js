@@ -39,27 +39,27 @@ const search = ({ data }) => {
   }, [searchInput]);
 
   //Search Filter Method
-  const filtered = data.allHotels?.filter((item) =>
+  const filtered = data?.hotels?.filter((item) =>
     item.name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
   const onPopularityHandler = () => {
     const sortedPopularity = data?.hotels
-      .slice()
+      ?.slice()
       .sort((a, b) => b.rating - a.rating);
     setSortedProduct(sortedPopularity);
     setProductSorting("Popularity");
   };
   const onHightolowHandler = () => {
-    const sortedHightoLow = data?.hotels
-      .slice()
+    const sortedHightoLow = sortedProduct
+      ?.slice()
       .sort((a, b) => b.price - a.price);
     setSortedProduct(sortedHightoLow);
     setProductSorting("Price: High to Low");
   };
   const onLowtohighHandler = () => {
-    const sortedLowtoHigh = data?.hotels
-      .slice()
+    const sortedLowtoHigh = sortedProduct
+      ?.slice()
       .sort((a, b) => a.price - b.price);
     setSortedProduct(sortedLowtoHigh);
     setProductSorting("Price: Low to High");
@@ -71,8 +71,7 @@ const search = ({ data }) => {
     setIsMode((prev) => !prev);
     toggleTheme((prev) => !prev);
   };
-  console.log("Sorted====>", sortedProduct);
-  console.log("Lenght", sortedProduct?.length);
+
   return (
     <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
@@ -110,16 +109,14 @@ const search = ({ data }) => {
               </div>
               <div
                 className="flex items-center justify-end gap-2 cursor-pointer  "
-                onClick={onModeHanlder}
-              >
+                onClick={onModeHanlder}>
                 {isMode ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
               </div>
               <div className="flex items-center justify-center gap-3">
                 <span>Sort By</span>
                 <div
                   className="border-2 rounded bg-transparent px-2 py-1 font-normal flex items-center w-56 justify-between cursor-pointer relative "
-                  onClick={() => setIsSort(!isSort)}
-                >
+                  onClick={() => setIsSort(!isSort)}>
                   <span>{productSorting}</span>
                   <span>
                     {isSort ? (
@@ -153,14 +150,13 @@ const search = ({ data }) => {
                 visible={true}
               />
             </div>
-          ) : data?.hotels?.length > 0 ? (
+          ) : sortedProduct?.length > 0 ? (
             <section className="h-[86vh] overflow-y-auto scrollbar-hide">
-              {data?.hotels?.map((item, key) => {
+              {sortedProduct?.map((item, key) => {
                 return (
                   <div
                     key={key}
-                    className="py-4 flex flex-col border-b border-gray-300  "
-                  >
+                    className="py-4 flex flex-col border-b border-gray-300  ">
                     <div className=" w-100 h-100 flex items-center justify-between gap-6 cursor-pointer ">
                       <SearchImageSlider item={item} />
                       <div className="w-[50%] flex flex-col items-start justify-between  h-64 ">

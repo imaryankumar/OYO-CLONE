@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
+
 const Navbar = () => {
   const router = useRouter();
   const [session, setSession] = useState();
@@ -27,8 +28,7 @@ const Navbar = () => {
       <div className="px-4">
         <span
           className="text-red-500 font-black text-4xl cursor-pointer "
-          onClick={() => router.push("/")}
-        >
+          onClick={() => router.push("/")}>
           OYO
         </span>
       </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
             <span className="text-base font-light">Call us to Book now</span>
           </div>
         </li>
-        <li className="flex items-center justify-center gap-2 cursor-pointer ">
+        <li className="flex items-center justify-center gap-2 cursor-pointer relative ">
           <TbWorld size={30} />
           <div className="flex items-start justify-center gap-2 ">
             <span className="font-medium">English</span>
@@ -68,8 +68,7 @@ const Navbar = () => {
 
         <li
           onClick={() => router.push("/hoteladd")}
-          className="flex items-center justify-center gap-3 cursor-pointer "
-        >
+          className="flex items-center justify-center gap-3 cursor-pointer ">
           Add Hotels
         </li>
 

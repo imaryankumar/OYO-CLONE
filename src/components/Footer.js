@@ -21,8 +21,8 @@ const Footer = () => {
           <a href="#" className="text-gray-300 hover:text-white">
             Terms
           </a>
-          <a href="#" className="text-gray-300 hover:text-white">
-            Privacy
+          <a href="/guest-policy" className="text-gray-300 hover:text-white">
+            Guest Policy
           </a>
         </div>
       </div>
