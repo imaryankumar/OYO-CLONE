@@ -7,7 +7,7 @@ const SearchBookingBtn = ({ item }) => {
   let cookie = Cookies.get("userToken");
   const onHotelBookHandler = () => {
     if (!cookie) {
-      toast.error("Please Logged In!");
+      toast.error("Please LogIn");
       setTimeout(() => {
         router.push("/login");
       }, 1000);
@@ -33,8 +33,7 @@ const SearchBookingBtn = ({ item }) => {
 
       <button
         className="px-5 py-2 bg-green-500 rounded text-white font-medium cursor-pointer "
-        onClick={onHotelBookHandler}
-      >
+        onClick={onHotelBookHandler}>
         Book Now
       </button>
     </div>

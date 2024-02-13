@@ -62,7 +62,7 @@ const SearchBanner = () => {
     setSearchInput(e.target.value);
   };
   const onCityNameHandler = (name) => {
-    setSearchInput(name + " ");
+    router.push(`/search?location=${name}`);
   };
   return (
     <section className="w-100 h-60 bg-gradient-to-r from-pink-300 via-red-500 to-red-500 ">

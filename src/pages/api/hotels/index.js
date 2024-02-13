@@ -25,7 +25,7 @@ export default async function Handler(req, res) {
         !rating
       ) {
         return res
-          .status(400)
+          .status(404)
           .json({ sucess: false, msg: "All Fields are Mandatory" });
       }
       const newHotel = await hotelModal.create({
@@ -47,7 +47,7 @@ export default async function Handler(req, res) {
       if (hotels.length > 0) {
         return res.status(200).json({ success: true, hotels });
       } else {
-        return res.status(400).json({ success: true, msg: "Hotels Not Found" });
+        return res.status(404).json({ success: true, msg: "Hotels Not Found" });
       }
       // const allHotels = await hotelModal.find({});
       // return res.status(200).json({ success: true, allHotels });

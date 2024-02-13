@@ -64,21 +64,18 @@ const hoteladd = () => {
       <h1 className="text-center py-3 text-3xl font-semibold ">
         <span
           className="text-red-500 text-3xl font-semibold cursor-pointer"
-          onClick={() => router.push("/")}
-        >
+          onClick={() => router.push("/")}>
           OYO
         </span>{" "}
-        Room Added
+        Add Hotel
       </h1>
       <form
         onSubmit={(e) => onHotelDataHandler(e)}
-        className="w-[50%] mx-auto bg-slate-50 shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
+        className="w-[50%] mx-auto bg-slate-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
+            htmlFor="name">
             Hotel Name
           </label>
           <input
@@ -95,8 +92,7 @@ const hoteladd = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="description"
-          >
+            htmlFor="description">
             Hotel Description
           </label>
           <textarea
@@ -107,14 +103,12 @@ const hoteladd = () => {
             value={hotelDataAdd.description}
             onChange={(e) =>
               setHotelDataAdd({ ...hotelDataAdd, description: e.target.value })
-            }
-          ></textarea>
+            }></textarea>
         </div>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="bannerImage"
-          >
+            htmlFor="bannerImage">
             Banner Image URL
           </label>
           <input
@@ -131,8 +125,7 @@ const hoteladd = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="galleryImage"
-          >
+            htmlFor="galleryImage">
             Gallery Image URL
           </label>
           <textarea
@@ -146,14 +139,12 @@ const hoteladd = () => {
                 ...hotelDataAdd,
                 gallery: e.target.value.split(","),
               })
-            }
-          ></textarea>
+            }></textarea>
         </div>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="price"
-          >
+            htmlFor="price">
             Price
           </label>
           <input
@@ -170,8 +161,7 @@ const hoteladd = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="basePrice"
-          >
+            htmlFor="basePrice">
             Base Price
           </label>
           <input
@@ -188,8 +178,7 @@ const hoteladd = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="location"
-          >
+            htmlFor="location">
             Location
           </label>
           <input
@@ -206,8 +195,7 @@ const hoteladd = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="rating"
-          >
+            htmlFor="rating">
             Rating
           </label>
           <input
