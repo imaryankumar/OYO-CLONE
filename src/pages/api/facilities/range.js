@@ -14,5 +14,7 @@ export default async function Handler(req, res) {
         rangeHotel,
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -66,7 +66,12 @@ const login = () => {
       const loginRespData = await loginData.json();
       if (loginRespData.success === true) {
         toast.success(loginRespData.msg);
-        Cookies.set("userToken", loginRespData.token, { expires: 1 });
+        Cookies.set("userToken", loginRespData.token, {
+          expires: 1,
+        });
+        Cookies.set("emailToken", loginRespData.email, {
+          expires: 1,
+        });
         router.back();
       } else {
         toast.error(loginRespData.msg);
@@ -93,15 +98,13 @@ const login = () => {
         backgroundSize: "cover",
         width: "100vw",
         height: "100vh",
-      }}
-    >
+      }}>
       <SEO title="OYO:India's Best Online Hotels" />
       <div className="px-20 py-6">
         <nav className="flex items-center justify-start gap-6 text-white opacity-100 ">
           <div
             className="text-4xl font-black cursor-pointer  text-red-500 "
-            onClick={() => router.push("/")}
-          >
+            onClick={() => router.push("/")}>
             OYO
           </div>
           <span className="text-2xl font-serif ">
@@ -128,8 +131,7 @@ const login = () => {
             </div>
             <form
               className="flex flex-col items-start justify-start bg-white px-4 py-4 text-black gap-4 rounded"
-              onSubmit={onSubmitHandler}
-            >
+              onSubmit={onSubmitHandler}>
               <h1 className="text-xl font-medium">Login / Signup</h1>
               {!isLogin && (
                 <input
@@ -163,22 +165,19 @@ const login = () => {
               {isLogin ? (
                 <button
                   onClick={onLoginHandler}
-                  className="py-1 px-6 rounded bg-red-500 text-white"
-                >
+                  className="py-1 px-6 rounded bg-red-500 text-white">
                   Login
                 </button>
               ) : (
                 <button
                   onClick={onSigninHandler}
-                  className="py-1 px-6 rounded bg-red-500 text-white"
-                >
+                  className="py-1 px-6 rounded bg-red-500 text-white">
                   Signup
                 </button>
               )}
               <div
                 className="w-100 bg-white rounded-full flex items-center justify-center gap-3 border py-2 px-4  cursor-pointer mx-6 "
-                onClick={() => signIn("google")}
-              >
+                onClick={() => signIn("google")}>
                 <FcGoogle size={25} />
                 <span>Continue with Google</span>
               </div>
@@ -187,8 +186,7 @@ const login = () => {
                 {isLogin ? "Sign in with email" : "Log in with password"}?{" "}
                 <span
                   className="text-red-500 cursor-pointer"
-                  onClick={userLoginHandler}
-                >
+                  onClick={userLoginHandler}>
                   Click here
                 </span>
               </div>

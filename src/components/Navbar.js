@@ -13,6 +13,7 @@ import { toast } from "react-hot-toast";
 const Navbar = () => {
   const router = useRouter();
   const [session, setSession] = useState();
+
   useEffect(() => {
     setSession(Cookies.get("userToken"));
   }, []);

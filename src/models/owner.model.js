@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const ownerSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       require: true,
       trim: true,
@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const userModel = mongoose.models?.User || mongoose.model("User", userSchema);
+const OwnerModel =
+  mongoose.models?.Owner || mongoose.model("Owner", ownerSchema);
 
-export default userModel;
+export default OwnerModel;
