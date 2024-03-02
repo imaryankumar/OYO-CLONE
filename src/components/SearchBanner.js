@@ -51,8 +51,12 @@ const SearchBanner = () => {
   const onSearchHandler = () => {
     if (searchInput) {
       setIsLoading(true);
+      const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      };
+      const inputCapitalize = capitalizeFirstLetter(searchInput);
       setTimeout(() => {
-        router.push(`/search?location=${searchInput}`);
+        router.push(`/search?location=${inputCapitalize}`);
       }, 1000);
     } else {
       toast.error("Please Enter Your Location!");

@@ -191,9 +191,18 @@ export default search;
 
 export async function getServerSideProps(context) {
   const { query } = context;
+  const locationParam = query.location;
   const res = await fetch(
     `${process.env.BASE_URL}/api/hotels?city=${query.location}`
   );
   const data = await res.json();
+  if (!locationParam) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return { props: { data } };
 }
