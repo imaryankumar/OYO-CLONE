@@ -1,6 +1,6 @@
 import SEO from "@/components/SEO";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import { RotatingLines } from "react-loader-spinner";
@@ -27,7 +27,7 @@ const search = ({ data }) => {
   const [productSorting, setProductSorting] = useState("Recommended");
   const [sortedProduct, setSortedProduct] = useState(data?.hotels);
   const router = useRouter();
-
+  const sortRef = useRef();
   useEffect(() => {
     const id = setTimeout(() => {
       setSortedProduct(filtered);
@@ -72,6 +72,17 @@ const search = ({ data }) => {
     toggleTheme((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setIsSort(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   return (
     <section className={darkMode ? "dark" : "light"}>
       <div className="w-100 h-100 relative flex ">
@@ -126,7 +137,9 @@ const search = ({ data }) => {
                     )}
                   </span>
                   {isSort && (
-                    <div className="absolute top-10 right-0 left-0 bg-white text-black p-2 border-2 flex flex-col items-start justify-center gap-3 font-light ">
+                    <div
+                      className="absolute top-10 right-0 left-0 bg-white text-black p-2 border-2 flex flex-col items-start justify-center gap-3 font-light "
+                      ref={sortRef}>
                       <span onClick={onPopularityHandler}>Popularity</span>
                       <span onClick={onHightolowHandler}>
                         Price: High to Low

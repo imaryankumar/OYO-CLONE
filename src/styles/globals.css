@@ -50,3 +50,7 @@
   padding: 1rem 0;
   cursor: pointer;
 }
+
+.react-multiple-carousel__arrow {
+  z-index: 2 !important;
+}

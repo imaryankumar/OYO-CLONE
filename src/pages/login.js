@@ -8,6 +8,7 @@ import bgImage from "../../public/images/loginimgs.jpg";
 import SEO from "@/components/SEO";
 import { FcGoogle } from "react-icons/fc";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 const login = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -181,6 +182,11 @@ const login = () => {
                 <FcGoogle size={25} />
                 <span>Continue with Google</span>
               </div>
+              {isLogin && (
+                <div className="text-center w-full text-red-500">
+                  <Link href={"/forgot-password"}>Forgot Password</Link>
+                </div>
+              )}
               <div className="text-sm">
                 Prefer to{" "}
                 {isLogin ? "Sign in with email" : "Log in with password"}?{" "}
